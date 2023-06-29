@@ -1,5 +1,6 @@
-import { Column, Entity, Index } from 'typeorm';
+import { Column, Entity, Index, OneToMany } from 'typeorm';
 import { Base } from './base.entity';
+import { Account } from './account.entity';
 @Entity()
 export class User extends Base {
   @Column({ nullable: true })
@@ -14,4 +15,7 @@ export class User extends Base {
 
   @Column({ select: false })
   password!: string;
+
+  @OneToMany(() => Account, account => account.user)
+  accounts!: Account[];
 }
