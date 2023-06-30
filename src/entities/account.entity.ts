@@ -8,9 +8,6 @@ export class Account extends Base {
   @Column()
   name!: string;
 
-  @Column()
-  bankId!: number;
-
   @ManyToOne(() => User, user => user.accounts)
   user!: User;
 
@@ -18,5 +15,5 @@ export class Account extends Base {
   bank!: Bank;
 
   @ManyToOne(() => TypeAccount, typeAccount => typeAccount.accounts)
-  type!: TypeAccount;
+  typeAccount!: TypeAccount;
 }

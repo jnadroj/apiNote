@@ -6,6 +6,6 @@ export class TypeAccount extends Base {
   @Column()
   name!: string;
 
-  @OneToMany(() => Account, account => account.type)
+  @OneToMany(() => Account, account => account.typeAccount)
   accounts!: Account[];
 }

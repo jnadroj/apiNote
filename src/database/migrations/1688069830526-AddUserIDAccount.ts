@@ -10,7 +10,7 @@ export class AddUserIDAccount1688069830526 implements MigrationInterface {
     await queryRunner.addColumn(
       'account',
       new TableColumn({
-        name: 'user_id',
+        name: 'userId',
         type: 'int',
         isNullable: true
       })
@@ -19,7 +19,7 @@ export class AddUserIDAccount1688069830526 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'account',
       new TableForeignKey({
-        columnNames: ['user_id'],
+        columnNames: ['userId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'user',
         onDelete: 'CASCADE'
@@ -28,7 +28,7 @@ export class AddUserIDAccount1688069830526 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('account', 'user_id');
-    await queryRunner.dropColumn('account', 'user_id');
+    await queryRunner.dropForeignKey('account', 'userId');
+    await queryRunner.dropColumn('account', 'userId');
   }
 }

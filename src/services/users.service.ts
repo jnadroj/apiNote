@@ -33,7 +33,9 @@ export class UsersService {
   }
 
   showUser(id: number) {
-    return this.userRepository.findOne(id);
+    return this.userRepository.findOne(id, {
+      relations: ['accounts']
+    });
   }
 
   createUser(user: User) {
