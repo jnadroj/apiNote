@@ -28,11 +28,13 @@ export class UserController {
     return this.usersService.listUsers();
   }
 
+  @Authorized()
   @Get('/:id')
   async show(@Param('id') id: number): Promise<User | undefined> {
     return this.usersService.showUser(id);
   }
 
+  @Authorized()
   @Post()
   async post(@Body() userDTO: SignUpDTO): Promise<InsertResult> {
     try {
@@ -46,6 +48,7 @@ export class UserController {
     }
   }
 
+  @Authorized()
   @Put('/:id')
   async put(
     @Param('id') id: number,
@@ -55,6 +58,7 @@ export class UserController {
     return this.usersService.editUser({ id, user });
   }
 
+  @Authorized()
   @Delete('/:id')
   async delete(@Param('id') id: number): Promise<DeleteResult> {
     return this.usersService.deleteUser(id);

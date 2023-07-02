@@ -1,5 +1,6 @@
 import Container from 'typedi';
 import { JWTService } from '@services/jwt.service';
+import { UsersService } from '@services/users.service';
 import { RedisService } from '@services/redis.service';
 import { Action } from 'routing-controllers';
 
@@ -20,6 +21,7 @@ export class AuthorizationService {
   ): Promise<boolean> {
     const jwt = Container.get(JWTService);
     const redis = Container.get(RedisService);
+    const usersService = Container.get(UsersService);
     try {
       let token = action.request.headers['authorization'];
       if (!token) {
@@ -33,6 +35,11 @@ export class AuthorizationService {
       const {
         data: { email }
       } = payload;
+
+      const user = await usersService.existsUserByEmail(email);
+      if (Boolean(user) === false) {
+        return false;
+      }
       const tokenIsBlacklisted: number = await redis.isMemberOfSet({
         email,
         token

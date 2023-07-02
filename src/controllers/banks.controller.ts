@@ -28,11 +28,13 @@ export class BankController {
     return this.banksService.listBanks();
   }
 
+  @Authorized()
   @Get('/:id')
   async show(@Param('id') id: number): Promise<Bank | undefined> {
     return this.banksService.showBank(id);
   }
 
+  @Authorized()
   @Post()
   async post(@Body() bankDTO: BaseBankDTO): Promise<InsertResult> {
     try {
@@ -46,6 +48,7 @@ export class BankController {
     }
   }
 
+  @Authorized()
   @Put('/:id')
   async put(
     @Param('id') id: number,
@@ -55,6 +58,7 @@ export class BankController {
     return this.banksService.editBank({ id, bank });
   }
 
+  @Authorized()
   @Delete('/:id')
   async delete(@Param('id') id: number): Promise<DeleteResult> {
     return this.banksService.deleteBank(id);

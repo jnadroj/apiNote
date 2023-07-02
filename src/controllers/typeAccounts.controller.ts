@@ -28,13 +28,17 @@ export class TypeAccountController {
     return this.typeAccountsService.listTypeAccounts();
   }
 
+  @Authorized()
   @Get('/:id')
   async show(@Param('id') id: number): Promise<TypeAccount | undefined> {
     return this.typeAccountsService.showTypeAccount(id);
   }
 
+  @Authorized()
   @Post()
-  async post(@Body() typeAccountDTO: BaseTypeAccountDTO): Promise<InsertResult> {
+  async post(
+    @Body() typeAccountDTO: BaseTypeAccountDTO
+  ): Promise<InsertResult> {
     try {
       return await this.typeAccountsService.createTypeAccount(
         EntityMapper.mapTo(TypeAccount, typeAccountDTO)
@@ -46,15 +50,20 @@ export class TypeAccountController {
     }
   }
 
+  @Authorized()
   @Put('/:id')
   async put(
     @Param('id') id: number,
     @Body() typeAccountDTO: BaseTypeAccountDTO
   ): Promise<UpdateResult> {
-    const typeAccount: TypeAccount = EntityMapper.mapTo(TypeAccount, typeAccountDTO);
+    const typeAccount: TypeAccount = EntityMapper.mapTo(
+      TypeAccount,
+      typeAccountDTO
+    );
     return this.typeAccountsService.editTypeAccount({ id, typeAccount });
   }
 
+  @Authorized()
   @Delete('/:id')
   async delete(@Param('id') id: number): Promise<DeleteResult> {
     return this.typeAccountsService.deleteTypeAccount(id);

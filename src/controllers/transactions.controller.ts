@@ -28,11 +28,13 @@ export class TransactionController {
     return this.transactionsService.listTransactions();
   }
 
+  @Authorized()
   @Get('/:id')
   async show(@Param('id') id: number): Promise<Transaction | undefined> {
     return this.transactionsService.showTransaction(id);
   }
 
+  @Authorized()
   @Post()
   async post(
     @Body() transactionDTO: BaseTransactionDTO
@@ -48,6 +50,7 @@ export class TransactionController {
     }
   }
 
+  @Authorized()
   @Put('/:id')
   async put(
     @Param('id') id: number,
@@ -60,6 +63,7 @@ export class TransactionController {
     return this.transactionsService.editTransaction({ id, transaction });
   }
 
+  @Authorized()
   @Delete('/:id')
   async delete(@Param('id') id: number): Promise<DeleteResult> {
     return this.transactionsService.deleteTransaction(id);

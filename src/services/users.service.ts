@@ -16,6 +16,10 @@ export class UsersService {
     return compareSync(password, userPassword);
   }
 
+  existsUserByEmail(email: string): Promise<User | undefined> {
+    return this.userRepository.findOne({ where: { email } });
+  }
+
   generateToken(user: User) {
     return this.jwtService.createJWT(user);
   }

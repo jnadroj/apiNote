@@ -28,11 +28,13 @@ export class AccountController {
     return this.accountsService.listAccounts();
   }
 
+  @Authorized()
   @Get('/:id')
   async show(@Param('id') id: number): Promise<Account | undefined> {
     return this.accountsService.showAccount(id);
   }
 
+  @Authorized()
   @Post()
   async post(@Body() accountDTO: BaseAccountDTO): Promise<InsertResult> {
     try {
@@ -46,6 +48,7 @@ export class AccountController {
     }
   }
 
+  @Authorized()
   @Put('/:id')
   async put(
     @Param('id') id: number,
@@ -55,6 +58,7 @@ export class AccountController {
     return this.accountsService.editAccount({ id, account });
   }
 
+  @Authorized()
   @Delete('/:id')
   async delete(@Param('id') id: number): Promise<DeleteResult> {
     return this.accountsService.deleteAccount(id);
